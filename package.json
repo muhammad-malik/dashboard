@@ -1,0 +1,16 @@
+{
+  "name": "dashboard",
+  "version": "0.5.0",
+  "description": "Dashboard for Ijtema 2019",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Usama Malik",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
+  }
+}
