@@ -21,7 +21,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res, next) => {
 
     let messagesList = [];
-    let programme = [];
+    let programme1 = [];
+    let programme2 = [];
     let messages = "";
 
     // getting all images
@@ -33,23 +34,28 @@ app.get('/', (req, res, next) => {
     // reading the messages
     fs.readFile("data/messages.txt", "utf8", (err, data) => {
         if (err) throw err;
-        messagesList = data.split(/\r\n|\n/);
+        messagesList = data.trim().split(/\r\n|\n/);
         messagesList.reverse().forEach(msg => {
-            messages += msg + " | ";
+            messages += msg + " *** ";
         });
 
         // reading the programme
         fs.readFile("data/programme.txt", "utf8", (err, data2) => {
             if (err) throw err; 
-            programme = data2.split(/\r\n|\n/);
-  
+            let programme = data2.trim().split(/\r\n|\n/);
+            for (prog of programme) {
+                programme1.push(prog.split(":-")[0]);
+                programme2.push(prog.split(":-")[1]);
+            }
+            
             return res.render('index', {
                 pageTitle: 'Home',
                 lastImage: lastImage,
-                images: images.reverse(),
+                images: images,
                 lastImage: lastImage,
                 messages: messages,
-                programme: programme, 
+                programme1: programme1,
+                programme2: programme2, 
                 path: '/',
                 time: time
             });
